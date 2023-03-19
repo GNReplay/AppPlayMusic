@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/back"
+
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:id="@+id/search_view"
+            style="@style/Widget.Material3.SearchBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_view_bg"
+            app:queryHint="Search Song..."
+            app:iconifiedByDefault="false"/>
+        <ImageView
+            android:paddingLeft="5dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_toEndOf="@id/search_view"
+            android:id="@+id/imageView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/avatar"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/img_song"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="100dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" />
+
+
+    <com.google.android.material.slider.Slider
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="425dp"
+        app:trackColor="@color/light_light_blue"
+        app:trackColorInactive="@color/light_pink"
+        app:trackColorActive="@color/light_puple"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <LinearLayout
+        android:id="@+id/previous_play_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="475dp"
+        android:orientation="horizontal"
+        >
+
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/previous"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:iconTint="@color/light_light_blue"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/pause"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:iconTint="@color/light_light_blue"/>
+
+
+        <com.google.android.material.button.MaterialButton
+
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/next"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:iconTint="@color/light_light_blue"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:background="@drawable/search_view_bg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc leo lectus, tincidunt vel orci eu, blandit varius justo. Nam tincidunt sapien ut cursus auctor. Integer in lorem vel neque semper laoreet blandit id nunc. Quisque congue ipsum ac quam pulvinar, et porta arcu hendrerit. Nulla ut egestas dui. Nunc pretium, nulla a molestie placerat, metus nisi posuere erat, vel tincidunt tellus quam sed leo. Vivamus fringilla risus non diam convallis, quis tristique leo cursus. Integer laoreet diam sem, sit amet condimentum sem sodales ut. Vestibulum eget sem ac orci aliquet feugiat. Maecenas mollis malesuada urna, nec sollicitudin lacus cursus vitae."/>
+
+</RelativeLayout>
