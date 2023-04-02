@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "763742208686",
+    "project_id": "appmusic-a6b82",
+    "storage_bucket": "appmusic-a6b82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763742208686:android:5409a9a298efd762e8e33f",
+        "android_client_info": {
+          "package_name": "hcmute.edu.vn.appplaymusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763742208686-mrgnvbpesta092jlesu3rda4t9suauhm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hcmute.edu.vn.appplaymusic",
+            "certificate_hash": "ddaaab6de5f3c88c6d3f9584954b826af68a7265"
+          }
+        },
+        {
+          "client_id": "763742208686-re40j7f10kslhis8ndp16ab004ebe453.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIgOMbBRw3vBAHGQNu0qRMIxtquEKeP7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763742208686-re40j7f10kslhis8ndp16ab004ebe453.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
