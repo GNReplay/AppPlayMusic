@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgSong, playorpause, imgClear, imgBack, imgNext;
     private TextView tvTitleSong, tvSingleSong;
     private UploadFile msong;
-    private boolean isPlaying;
+    private Boolean isPlaying;
     private int positionSong = 0;
+    private int Duration;
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             msong = (UploadFile) bundle.get("object_song");
             isPlaying = bundle.getBoolean("status_player");
             int actionMusic = bundle.getInt("action_music");
+            Duration = bundle.getInt("duration");
             handleLayoutMusic(actionMusic);
         }
     };
@@ -114,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<UploadFile> ArraySong = new ArrayList<UploadFile>(songList);
                 Intent intent = new Intent(MainActivity.this,LayoutSongActivity.class);
                 intent.putExtra("song", ArraySong)
-                                .putExtra("position",positionSong);
+                                .putExtra("position",positionSong)
+                        .putExtra("duration",Duration);
                 startActivity(intent);
             }
         });
@@ -240,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendActionToService(int action){
+        ArrayList<UploadFile> ArraySong = new ArrayList<UploadFile>(songList);
         Intent intent = new Intent(this, MyService.class);
         intent.putExtra("action_music_service", action);
         startService(intent);

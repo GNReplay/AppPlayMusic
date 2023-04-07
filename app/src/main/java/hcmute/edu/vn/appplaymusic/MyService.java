@@ -1,6 +1,8 @@
 package hcmute.edu.vn.appplaymusic;
 
 import static hcmute.edu.vn.appplaymusic.MyApplication.CHANEL_ID;
+
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -9,10 +11,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
-import android.widget.RemoteViews;
 
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -22,7 +26,6 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import hcmute.edu.vn.appplaymusic.Model.UploadFile;
 
@@ -33,11 +36,13 @@ public class MyService extends Service {
     public static final int ACTION_START = 4;
     public static final int ACTION_BACK = 5;
     public static final int ACTION_NEXT = 6;
+    public static final int ACTION_DURATION = 7;
     private MediaPlayer mediaPlayer;
-    private Boolean isPlaying;
+    private Boolean isPlaying = null;
     private UploadFile mSong;
-
-    private int currentDuration;
+    private int Duration;
+    private int Progress;
+    private int Current_position = 0;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -66,6 +71,7 @@ public class MyService extends Service {
             }
         }
         int actionMusic = intent.getIntExtra("action_music_service",0);
+        Progress = intent.getIntExtra("progress",0);
         UploadFile song = (UploadFile) intent.getSerializableExtra("song");
         if(song != null) {
             mSong = song;
@@ -97,13 +103,50 @@ public class MyService extends Service {
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                Duration = mediaPlayer.getDuration();
+                sendActiveActivity(ACTION_DURATION);
                 mp.start();
             }
         });
-        mediaPlayer.prepareAsync();
+      mediaPlayer.prepareAsync();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (mediaPlayer != null) {
+                    try {
+                        if (isPlaying) {
+                            Message msg = new Message();
+                            msg.what = mediaPlayer.getCurrentPosition();
+                            handler.sendMessage(msg);
+                            Thread.sleep(900);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                sendActiveActivity(ACTION_NEXT);
+            }
+        });
         isPlaying = true;
         sendActiveActivity(ACTION_START);
     }
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            int current_position = msg.what;
+            Current_position = current_position;
+            sendActiveActivity(ACTION_DURATION);
+        }
+    };
 
     private void handleActionMusic(int action) throws IOException {
         switch (action){
@@ -122,6 +165,9 @@ public class MyService extends Service {
                 break;
             case ACTION_NEXT:
                 sendActiveActivity(ACTION_NEXT);
+                break;
+            case ACTION_DURATION:
+                Seekbar();
                 break;
         }
     }
@@ -142,6 +188,10 @@ public class MyService extends Service {
             sendNotification(mSong);
             sendActiveActivity(ACTION_RESUME);
         }
+    }
+
+    private void Seekbar(){
+        mediaPlayer.seekTo(Progress);
     }
 
 //    private void sendNotification(@NotNull UploadFile song) {
@@ -229,7 +279,8 @@ public class MyService extends Service {
         bundle.putSerializable("object_song", mSong);
         bundle.putBoolean("status_player",isPlaying);
         bundle.putInt("action_music",action);
-        bundle.putInt("duration", currentDuration);
+        bundle.putInt("duration",Duration);
+        bundle.putInt("current",Current_position);
         intent.putExtras(bundle);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
