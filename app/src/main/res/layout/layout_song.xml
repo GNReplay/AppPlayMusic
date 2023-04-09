@@ -20,7 +20,7 @@
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:background="@drawable/back"
-
+            android:id="@+id/back_activity"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.SearchView
@@ -56,28 +56,72 @@
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher" />
 
+    <TextView
+        android:id="@+id/song_title"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_marginTop="425dp"
+        />
 
-    <com.google.android.material.slider.Slider
+    <TextView
+        android:id="@+id/song_single"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:textSize="20dp"
+        android:layout_marginTop="460dp"
+        />
+    <SeekBar
+        android:id="@+id/slider"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="425dp"
+        android:layout_marginTop="460dp"
         app:trackColor="@color/light_light_blue"
         app:trackColorInactive="@color/light_pink"
         app:trackColorActive="@color/light_puple"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        />
+
+    <TextView
+        android:id="@+id/curTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textStyle="bold"
+        android:layout_alignBottom="@id/slider"
+        android:layout_toLeftOf="@id/slider"
+        android:layout_marginBottom="18dp"
+    />
+
+    <TextView
+        android:id="@+id/tolTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textStyle="bold"
+        android:layout_alignBottom="@id/slider"
+        android:layout_toRightOf="@id/slider"
+        android:layout_marginBottom="18dp"
+        />
 
     <LinearLayout
         android:id="@+id/previous_play_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="475dp"
+        android:layout_marginTop="550dp"
         android:orientation="horizontal"
         >
 
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/previous"
@@ -88,6 +132,7 @@
         <com.google.android.material.button.MaterialButton
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:id="@+id/play_or_pause"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/pause"
@@ -96,7 +141,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-
+            android:id="@+id/btn_next"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/next"
@@ -104,16 +149,5 @@
             app:iconTint="@color/light_light_blue"/>
 
     </LinearLayout>
-
-    <TextView
-        android:background="@drawable/search_view_bg"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:padding="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc leo lectus, tincidunt vel orci eu, blandit varius justo. Nam tincidunt sapien ut cursus auctor. Integer in lorem vel neque semper laoreet blandit id nunc. Quisque congue ipsum ac quam pulvinar, et porta arcu hendrerit. Nulla ut egestas dui. Nunc pretium, nulla a molestie placerat, metus nisi posuere erat, vel tincidunt tellus quam sed leo. Vivamus fringilla risus non diam convallis, quis tristique leo cursus. Integer laoreet diam sem, sit amet condimentum sem sodales ut. Vestibulum eget sem ac orci aliquet feugiat. Maecenas mollis malesuada urna, nec sollicitudin lacus cursus vitae."/>
 
 </RelativeLayout>
